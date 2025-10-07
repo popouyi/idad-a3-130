@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ASCII Car Radio</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/tone"></script>
+  </head>
+  <body>
+    <div class="player-container">
+      <div class="section">
+        <div class="info-line">
+          <span class="label">TRACK:</span>
+          <span class="value track-name" id="track-name"></span>
+        </div>
+        <div class="info-line">
+          <span class="label">STATUS:</span>
+          <span class="value status" id="status"></span>
+        </div>
+        <div class="info-line">
+          <span class="label">TIME:</span>
+          <span class="value" id="time"></span>
+        </div>
+        <div class="info-line">
+          <span class="label">MOOD:</span>
+          <span class="value" id="mood"></span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="volume-control">
+          <span class="label">VOL</span>
+          <div class="volume-bar">
+            <div class="volume-fill" id="volume-fill"></div>
+          </div>
+          <span class="volume-text" id="volume-text"></span>
+          <span class="mute-indicator" id="mute-indicator"></span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="controls">
+          <button class="btn" id="btn-play">PLAY</button>
+          <button class="btn" id="btn-stop">STOP</button>
+          <button class="btn" id="btn-pause">PAUSE</button>
+          <button class="btn" id="btn-mute">MUTE</button>
+          <button class="btn" id="btn-loop">LOOP</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="info-line">
+          <span class="label">EQ:</span>
+          <div class="eq-display" id="eq-display"></div>
+        </div>
+      </div>
+
+      <div class="keyboard-hints">
+        <p>
+          Keyboard: [Space] Play/Pause | [S] Stop | [+/-] Volume | [M] Mute |
+          [L] Loop
+        </p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
