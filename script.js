@@ -1,20 +1,14 @@
 (() => {
-  // DOM Elements
-  const trackNameEl = document.getElementById("track-name");
-  const statusEl = document.getElementById("status");
-  const timeEl = document.getElementById("time");
-  const moodEl = document.getElementById("mood");
-  const volumeFillEl = document.getElementById("volume-fill");
-  const volumeTextEl = document.getElementById("volume-text");
-  const muteIndicatorEl = document.getElementById("mute-indicator");
-  const eqDisplayEl = document.getElementById("eq-display");
+  const uiEl = document.getElementById("ascii-ui");
+
+  // Button elements
   const btnPlay = document.getElementById("btn-play");
   const btnStop = document.getElementById("btn-stop");
   const btnPause = document.getElementById("btn-pause");
   const btnMute = document.getElementById("btn-mute");
   const btnLoop = document.getElementById("btn-loop");
 
-  // State
+  //  State
   let isPlaying = false;
   let isPaused = false;
   let isMuted = false;
@@ -234,14 +228,19 @@
     const now = new Date();
     const { mood } = getMoodSettings();
     const timeStr = now.toLocaleTimeString("en-GB");
-
-    // Status
     const status =
       isPlaying && !isPaused
         ? "▶ PLAYING"
         : isPaused
         ? "⏸ PAUSED"
         : "■ STOPPED";
+    const volBar =
+      "|".repeat(Math.round(volume / 10)) +
+      "-".repeat(10 - Math.round(volume / 10));
+    const eq = getAsciiEQ();
+
+    const WIDTH = 48;
+    const line = (txt) => `║ ${txt.padEnd(WIDTH, " ")} ║\n`;
 
     // Marquee track name
     let trackDisplay = trackName;
@@ -255,33 +254,30 @@
       trackDisplay = padded.substring(scrollIndex, scrollIndex + DISPLAY_WIDTH);
     }
 
-    // DOM
-    trackNameEl.textContent = trackDisplay;
-    statusEl.textContent = status;
-    timeEl.textContent = timeStr;
-    moodEl.textContent = mood;
+    let ui = "";
+    ui += "╔" + "═".repeat(WIDTH + 2) + "╗\n";
+    ui += line(`TRACK: ${trackDisplay}`);
+    ui += line(`STATUS: ${status}`);
+    ui += line(`TIME: ${timeStr}`);
+    ui += line(`MOOD: ${mood}`);
+    ui += "╠" + "═".repeat(WIDTH + 2) + "╣\n";
+    ui += line(
+      `VOL [${volBar}] ${String(volume).padStart(3)}% ${isMuted ? "MUTE" : ""}`
+    );
+    ui += "╠" + "═".repeat(WIDTH + 2) + "╣\n";
+    ui += line(`EQ: ${eq}`);
+    ui += "╚" + "═".repeat(WIDTH + 2) + "╝\n";
 
-    volumeFillEl.style.width = volume + "%";
-    volumeTextEl.textContent = volume + "%";
-    muteIndicatorEl.textContent = isMuted ? "MUTE" : "";
+    uiEl.textContent = ui;
 
-    eqDisplayEl.textContent = getAsciiEQ();
-
-    // button states
-    btnLoop.classList.toggle("active", isLooping);
-    btnMute.classList.toggle("active", isMuted);
+    // Update button states
     btnPlay.classList.toggle("active", isPlaying && !isPaused);
     btnPause.classList.toggle("active", isPaused);
+    btnMute.classList.toggle("active", isMuted);
+    btnLoop.classList.toggle("active", isLooping);
   }
 
-  // Event Listeners
-  btnPlay.addEventListener("click", play);
-  btnStop.addEventListener("click", stop);
-  btnPause.addEventListener("click", pause);
-  btnMute.addEventListener("click", toggleMute);
-  btnLoop.addEventListener("click", toggleLoop);
-
-  // Keyboard controls
+  // Controls - Keyboard
   window.addEventListener("keydown", (e) => {
     if (e.key === " ") {
       e.preventDefault();
@@ -295,7 +291,31 @@
     if (e.key.toLowerCase() === "l") toggleLoop();
   });
 
-  // Animation Loop
+  // Controls
+  uiEl.addEventListener("click", (e) => {
+    const lines = (uiEl.textContent || "").split("\n");
+    const ctrlLine = lines.find((l) => l.includes("[ PLAY ]"));
+    if (!ctrlLine) return;
+
+    const rect = uiEl.getBoundingClientRect();
+    const charWidth = rect.width / ctrlLine.length;
+    const y = Math.floor((e.clientY - rect.top) / (rect.height / lines.length));
+    const x = Math.floor((e.clientX - rect.left) / charWidth);
+
+    const check = (label, fn) => {
+      const idx = ctrlLine.indexOf(label);
+      if (idx >= 0 && x >= idx && x < idx + label.length) fn();
+    };
+  });
+
+  // Controls - Button clicks
+  btnPlay.addEventListener("click", play);
+  btnStop.addEventListener("click", stop);
+  btnPause.addEventListener("click", pause);
+  btnMute.addEventListener("click", toggleMute);
+  btnLoop.addEventListener("click", toggleLoop);
+
+  // Loop
   function loop() {
     updateEQ();
     render();

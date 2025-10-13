@@ -1,113 +1,45 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   background: #000;
   color: rgb(255, 89, 0);
-  font-family: "Courier New", monospace;
+  font-family: monospace;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  margin: 0;
   padding: 20px;
 }
 
-.player-container {
-  border: 3px solid rgb(255, 89, 0);
-  padding-inline: 20px;
-  background: #000;
-  box-shadow: 0 0 20px rgba(255, 89, 0, 0.3);
-  max-width: 600px;
-  width: 100%;
-}
-
-.section {
-  border-bottom: 2px solid rgb(255, 89, 0);
-  padding: 15px 0;
-}
-
-.section:last-of-type {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.info-line {
+.player-wrapper {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin: 8px 0;
-  font-size: 14px;
+  gap: 0;
 }
 
-.label {
-  font-weight: bold;
-  margin-right: 10px;
-  min-width: 80px;
+pre {
+  border: 2px solid rgb(255, 89, 0);
+  padding: 10px;
+  user-select: none;
+  line-height: 1.2;
+  cursor: pointer;
+  margin: 0;
 }
 
-.value {
-  flex: 1;
-}
-
-.track-name {
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: monospace;
-  letter-spacing: 1px;
-}
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.volume-control {
+.accessible-controls {
   display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.volume-bar {
-  flex: 1;
-  height: 20px;
-  background: #111;
-  border: 1px solid rgb(255, 89, 0);
-  position: relative;
-  overflow: hidden;
-}
-
-.volume-fill {
-  height: 100%;
-  background: rgb(255, 89, 0);
-  transition: width 0.1s ease;
-}
-
-.volume-text {
-  min-width: 40px;
-  text-align: right;
-}
-
-.mute-indicator {
-  min-width: 50px;
-  font-weight: bold;
-}
-
-.controls {
-  display: flex;
-  gap: 10px;
+  gap: 0px;
+  margin-top: 15px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.btn {
+.ctrl-btn {
   background: #000;
   color: rgb(255, 89, 0);
   border: 2px solid rgb(255, 89, 0);
   padding: 8px 16px;
-  font-family: "Courier New", monospace;
+  font-family: monospace;
   font-size: 13px;
   font-weight: bold;
   cursor: pointer;
@@ -115,62 +47,61 @@ body {
   min-width: 80px;
 }
 
-.btn:hover {
+.ctrl-btn:hover {
   background: rgb(255, 89, 0);
   color: #000;
 }
 
-.btn:active {
+.ctrl-btn:active {
   transform: scale(0.95);
 }
 
-.btn.active {
+.ctrl-btn:focus {
+  outline: 2px solid rgb(255, 89, 0);
+  outline-offset: 3px;
+}
+
+.ctrl-btn.active {
   background: rgb(255, 89, 0);
   color: #000;
 }
 
-.eq-display {
-  font-family: monospace;
-  letter-spacing: 3px;
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
+/* Keyboard hints section */
 .keyboard-hints {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px dashed rgb(255, 89, 0);
-  font-size: 11px;
-  opacity: 0.7;
+  margin-top: 20px;
+  padding: 15px 20px;
+  border: 1px solid rgb(255, 89, 0);
+  background: #000;
   text-align: center;
+  max-width: 600px;
 }
 
 .keyboard-hints p {
-  line-height: 1.5;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  opacity: 0.8;
 }
 
+/* Responsive */
 @media (max-width: 600px) {
-  .player-container {
-    padding: 15px;
+  pre {
+    font-size: 12px;
+    padding: 8px;
   }
 
-  .controls {
+  .accessible-controls {
     gap: 8px;
   }
 
-  .btn {
+  .ctrl-btn {
     min-width: 70px;
     padding: 6px 12px;
     font-size: 12px;
   }
 
-  .label {
-    min-width: 60px;
-    font-size: 13px;
-  }
-
-  .info-line {
-    font-size: 13px;
+  .keyboard-hints {
+    font-size: 10px;
+    padding: 10px;
   }
 }
