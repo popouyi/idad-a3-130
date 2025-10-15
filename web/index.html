@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reflection: ASCII Car Radio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <nav>
+    <a href="https://phenomenal-moonbeam-7a67bd.netlify.app/">Final UI</a>
+    <a href="https://loquacious-macaron-3a13e5.netlify.app/">Prototype</a>
+    <a href="https://github.com/popouyi/idad-a3-130">Github Repository</a>
+  </nav>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Reflection: ASCII Car Radio</h1>
+      </header>
+
+      <section>
+        <p>
+          For the last two assignments, I created an audio player that was
+          inspired by retro car radios and the ASCII aesthetic. The prototype
+          uses Date.now to adapt to the time of day by changing the audio to
+          match the different moods of the day. This reflection focuses on the
+          design values that guided it, how those values shaped its feedback and
+          usability, the major changes through production, and what I learned
+          from building it.
+        </p>
+      </section>
+
+      <section>
+        <h2>Guiding Design Values and Their Embodiment</h2>
+        <p>
+          The two core values that influenced the ASCII Car Radio project are
+          Clarity and Playfulness.
+        </p>
+        <p>
+          Clarity is the main value that I followed when creating this project.
+          The minimalistic UI was created for the sake of reducing distractions
+          and making each element’s purpose immediately clear. Every single
+          feature/element in the ASCII layout has a clear function, without
+          being too cluttered and overwhelming. The UI’s structure and
+          consistent spacing help users easily understand it, even without
+          overcomplicating it. Clarity guided how I grouped information, aligned
+          text, and displayed state changes.
+        </p>
+        <p>
+          Playfulness was another value that influenced the design. I wanted the
+          interface to feel engaging and have character despite its simplicity.
+          The scrolling track name, animated equalizer, and time-based “mood”
+          settings were all created to add more personality to the project. This
+          playfulness was implemented to make the interface feel less robotic
+          and dull, and more like a nostalgic experience.
+        </p>
+      </section>
+
+      <section>
+        <h2>Feedback, Information Design, Mapping, and Learnability</h2>
+
+        <h3>Feedback</h3>
+        <p>
+          The project’s feedback design is heavily inspired by a physical car
+          radio, from which I drew inspiration for most of the UI feedback
+          elements, adding a modern twist to them. For example, whenever a user
+          presses a button, the button lights up to signal that it has been
+          clicked, similar to how pressing a physical button produces a tactile
+          click. In the project, elements such as the scrolling track name,
+          status, volume, mood, and EQ bars all update in real time when they
+          receive feedback from users.
+        </p>
+
+        <h3>Information Design</h3>
+        <p>
+          The information design of the website distinguishes different sections
+          through the use of dividers and grouping. This approach helps users
+          understand the various functions of the project by structuring them in
+          a horizontal reading format. Additionally, I chose to position the
+          buttons outside the main audio player to mimic physical car radios,
+          creating a stronger sense of immersion and nostalgia.
+        </p>
+
+        <h3>Mapping and Learnability</h3>
+        <p>
+          I wanted the prototype’s controls to feel familiar and easy to learn;
+          therefore, I implemented well-known keyboard shortcuts such as the
+          Spacebar for play/pause and M for mute. To reduce cognitive load for
+          users who are less technologically experienced, I labeled each button
+          with its corresponding function and included hint text to help guide
+          users.
+        </p>
+      </section>
+
+      <section>
+        <h2>Changes Since the Work-in-Progress Milestone</h2>
+        <p>
+          I took the feedback that was given to me from the user testing and
+          also the assignment 2 submission. Most of the feedback talked about
+          the buttons not working, and some of the interactions were a bit
+          confusing to interact with.
+        </p>
+
+        <p>
+          For the buttons, I tried implementing HTML buttons behind the original
+          ASCII ones that was suggested from the feedback in the Assignment 2
+          submission. But it was a bit too complicated for me to implement
+          because i couldn’t figure out how to align them with the original
+          buttons. So, I figured just adding HTML buttons outside the media
+          player and stylising them so that they fit the aesthetic will also
+          work because it also mimics physical retro radios with the buttons
+          being located below the track name and volume.
+        </p>
+
+        <p>
+          I also added the text hints so that users don’t get confused when
+          interacting with the webpage. This will help reduce cognitive load and
+          make the experience of interacting with the project smoother.
+        </p>
+      </section>
+
+      <section>
+        <h2>Production Timeline & Development Reflection</h2>
+        <p>
+          <strong>Phase 1: Planning & Design</strong><br />
+          Sketched the ASCII layout with three information zones: track info at
+          the top, controls in the middle, EQ visualizer at the bottom. The
+          retro aesthetic enforced clarity through constraints.
+        </p>
+
+        <p>
+          <strong>Phase 2 : Foundation Code</strong><br />
+          Built the HTML/CSS/JS structure and implemented Tone.js audio playback
+          with play/pause/stop functions, volume control, and a time-based mood
+          system that adjusts EQ and playback rate throughout the day.
+        </p>
+
+        <p>
+          <strong>Phase 3 : The Rendering Struggle</strong><br />
+          The main challenge was the scrolling marquee for the track name. The
+          track name is 43 characters, but only 30 fit on screen. I struggled
+          with creating seamless character-by-character scrolling. First tried
+          CSS animations, but they were too smooth and hard to read. Switched to
+          JavaScript using modulo arithmetic to create infinite loops, but
+          didn't understand how the wrapping mechanism worked or why the index
+          needed to reset at the track name length. The solution was creating a
+          circular buffer by doubling the string with padding in between, then
+          extracting a window of 30 characters that slides through this doubled
+          text. This prevented jump-cuts when the scroll loops back to the
+          beginning.
+        </p>
+
+        <p>
+          <strong>Week 4: Audio Selection & EQ Visualizer</strong><br />
+          Added the real-time EQ visualizer using Tone.js Analyser, which
+          provides waveform data that I mapped to ASCII characters based on
+          audio intensity. This was surprisingly straightforward compared to the
+          rendering issues.
+        </p>
+
+        <p>
+          <strong>Week 5-6: Post Assignment 2</strong><br />
+          Received feedback from user testing and assignment 2 feedback.
+          Implemented changes such as more responsive buttons, and also a hint
+          text to help users navigate the experience better.
+        </p>
+      </section>
+
+      <section>
+        <h2>Aspect I’m Most Proud Of</h2>
+        <p>
+          I’m most proud of the ASCII rendering system. The overall look and
+          design of the project is similar to what I was going for in the
+          initial planning stage. Even in the user testing phase, I was really
+          pleased when I saw that the testers enjoyed the look of the experience
+          and that it resembled the car radio aesthetic that I was going for.
+        </p>
+      </section>
+
+      <section>
+        <h2>Most Challenging Aspect</h2>
+        <p>
+          The hardest challenge was figuring out how to make the ASCII rendering
+          system work because of the multiple complex functions, like the
+          scrolling track name. But through trials and tribulations, I still
+          created something that I’m proud of and I don’t regret putting in all
+          of my efforts in this project.
+        </p>
+      </section>
+
+      <footer>
+        <p>© 2025 ASCII Car Radio Reflection</p>
+      </footer>
+    </main>
+  </body>
+</html>
