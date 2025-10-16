@@ -3,45 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Music Player</title>
+    <title>ASCII Car Radio</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://unpkg.com/tone"></script>
   </head>
   <body>
     <div class="player-wrapper">
-      <div class="ui-container">
-        <pre id="ascii-ui" aria-live="polite"></pre>
+      <pre id="ascii-ui" aria-live="polite"></pre>
 
-        <button
-          class="invisible-btn"
-          id="inv-play"
-          aria-label="Play"
-          tabindex="0"
-        ></button>
-        <button
-          class="invisible-btn"
-          id="inv-stop"
-          aria-label="Stop"
-          tabindex="0"
-        ></button>
-        <button
-          class="invisible-btn"
-          id="inv-pause"
-          aria-label="Pause"
-          tabindex="0"
-        ></button>
-        <button
-          class="invisible-btn"
-          id="inv-mute"
-          aria-label="Mute"
-          tabindex="0"
-        ></button>
-        <button
-          class="invisible-btn"
-          id="inv-loop"
-          aria-label="Loop"
-          tabindex="0"
-        ></button>
+      <div class="accessible-controls">
+        <button class="ctrl-btn" id="btn-play" aria-label="Play">PLAY</button>
+        <button class="ctrl-btn" id="btn-stop" aria-label="Stop">STOP</button>
+        <button class="ctrl-btn" id="btn-pause" aria-label="Pause">
+          PAUSE
+        </button>
+        <button class="ctrl-btn" id="btn-mute" aria-label="Mute">MUTE</button>
+        <button class="ctrl-btn" id="btn-loop" aria-label="Loop">LOOP</button>
       </div>
 
       <div class="keyboard-hints">
@@ -52,6 +29,6 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </body>
 </html>
