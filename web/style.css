@@ -92,17 +92,6 @@ header {
   border-bottom: 2px solid #e1e4e8;
 }
 
-footer {
-  text-align: center;
-  font-size: 0.85rem;
-  color: #666;
-  border-top: 1px solid #e5e8ec;
-  padding: 1.5rem 0 2rem;
-  margin-top: 2.5rem;
-  background: #fafbfc;
-  border-radius: 0 0 12px 12px;
-}
-
 kbd {
   background: #edf1f6;
   border: 1px solid #d0d6de;
